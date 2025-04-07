@@ -1,0 +1,128 @@
+.login-wrapper {
+  min-height: 75vh;
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-container {
+  padding: 2rem;
+  background-color: white;
+}
+
+.testimonial-container {
+  background-color: #9b87f5;
+  position: relative;
+}
+
+.trusted-by {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.company-logos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quote-mark {
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.divider-container {
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.curve-divider {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100px;
+  background-color: #9b87f5;
+}
+
+.curve-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  left: -50px;
+  background: white;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+/* Glow button styles */
+.glow-button {
+  background: linear-gradient(to right, #222222, #333333);
+  border: none;
+  position: relative;
+  isolation: isolate;
+}
+
+.glow-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle 80px at var(--mouse-x) var(--mouse-y),
+    rgba(255, 165, 0, 0.7),
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.glow-button:hover::before {
+  opacity: 1;
+}
+
+/* Gradient for nav items */
+@keyframes gradient-pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+.nav-item-gradient {
+  animation: gradient-pulse 2s infinite ease-in-out;
+}
+
+@media (max-width: 640px) {
+  .login-wrapper {
+    flex-direction: column;
+    max-height: none;
+    min-height: auto;
+  }
+  
+  .form-container, 
+  .testimonial-container {
+    width: 100%;
+  }
+
+  .testimonial-container {
+    min-height: 300px;
+  }
+  
+  .divider-container {
+    display: none;
+  }
+}

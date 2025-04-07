@@ -1,149 +1,331 @@
-import React, { useState, useRef } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useRef, useEffect } from "react";
 
-const Section1 = ({ className = "" }) => {
+const Section1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSectionVisible, setIsSectionVisible] = useState(false);
+  const [playersReady, setPlayersReady] = useState(false);
+  const [youtubeApiLoaded, setYoutubeApiLoaded] = useState(false);
   const slidesContainerRef = useRef(null);
+  const playerRef = useRef({});
+  const sectionRef = useRef(null);
 
   const slides = [
     {
-      imgSrc: "/container-11@2x.png",
-      name: "Arvind Kumar, Founder and CEO",
-      company: "Qrius",
-      details: "IIT-JEE, AIR 1'05",
+      videoId: "Q511kge7-Hg",
+      name: "Chidvilas Reddy",
+      company: "IIT Bombay",
+      details: "IIT-JEE, AIR 1'23",
     },
     {
-      imgSrc: "/container-12@2x.png",
-      name: "Mukul Agarwal, SDE",
-      company: "Google",
-      details: "IIT-JEE, AIR 1'07",
+      videoId: "P3cQDU_TAho",
+      name: "Ved Lahoti",
+      company: "IIT Bombay",
+      details: "IIT-JEE, AIR 1'24",
     },
     {
-      imgSrc: "/container-13@2x.png",
-      name: "Ankit Goyal, SDE",
-      company: "Microsoft",
-      details: "IIT-JEE, AIR 2'10",
+      videoId: "oTePLRPskOc",
+      name: "Dhruvin Doshi",
+      company: "IIT Bombay",
+      details: "IIT-JEE, AIR 9'24",
     },
     {
-      imgSrc: "/container-14@2x.png",
-      name: "Mehul Soni",
-      company: "Qualcomm",
-      details: "AIR 3'08",
+      videoId: "hcE48YYJv2I",
+      name: "Aditya Verma",
+      company: "IIT Bombay",
+      details: "IIT-JEE, AIR 2'24",
     },
     {
-      imgSrc: "/container-12@2x.png",
-      name: "Mukul Agarwal, SDE",
-      company: "Google",
-      details: "IIT-JEE, AIR 1'07",
+      videoId: "2ivWmyX7sQI",
+      name: "Dwija Patel",
+      company: "IIT Bombay",
+      details: "JEE Adv, AIR 7'24",
     },
     {
-      imgSrc: "/container-13@2x.png",
-      name: "Ankit Goyal, SDE",
-      company: "Microsoft",
-      details: "IIT-JEE, AIR 2'10",
+      videoId: "sY5Vaz8BWVo",
+      name: "Aditya kumar Panda",
+      company: "AIIMS Delhi",
+      details: "NEET, AIR 1'24",
     },
   ];
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
-    scrollToSlide(currentIndex - 1);
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex < slides.length - 3 ? prevIndex + 1 : prevIndex
-    );
-    scrollToSlide(currentIndex + 1);
-  };
-
-  const scrollToSlide = (index) => {
-    if (slidesContainerRef.current) {
-      const slide = slidesContainerRef.current.children[index];
-      slide?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
+  // Load YouTube API
+  useEffect(() => {
+    // Only load the API once
+    if (window.YT) {
+      setYoutubeApiLoaded(true);
+      return;
+    }
+    
+    // Define the callback function before loading the script
+    window.onYouTubeIframeAPIReady = () => {
+      console.log("YouTube API is ready");
+      setYoutubeApiLoaded(true);
+    };
+    
+    // Create and load the script
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    tag.id = "youtube-iframe-api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    if (firstScriptTag && firstScriptTag.parentNode) {
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+    
+    return () => {
+      // Clean up players on component unmount
+      Object.values(playerRef.current).forEach(player => {
+        try {
+          if (player && typeof player.destroy === 'function') {
+            player.destroy();
+          }
+        } catch (e) {
+          console.error("Error destroying player:", e);
+        }
       });
+    };
+  }, []);
+  
+  // Initialize YouTube players once API is loaded
+  useEffect(() => {
+    if (!youtubeApiLoaded || !window.YT?.Player) {
+      return;
+    }
+    
+    // Create new player instances
+    const initializePlayers = () => {
+      try {
+        slides.forEach((slide) => {
+          const containerId = `youtube-player-${slide.videoId}`;
+          const container = document.getElementById(containerId);
+          
+          if (container && !playerRef.current[slide.videoId]) {
+            console.log(`Creating player for ${containerId}`);
+            
+            // Create the player
+            playerRef.current[slide.videoId] = new window.YT.Player(containerId, {
+              videoId: slide.videoId,
+              playerVars: {
+                autoplay: 0,
+                controls: 1,
+                rel: 0,
+                showinfo: 0,
+                mute: 1,
+                modestbranding: 1,
+                enablejsapi: 1,
+                origin: window.location.origin,
+                playsinline: 1
+              },
+              events: {
+                onReady: (event) => {
+                  console.log(`Player for ${slide.videoId} is ready`);
+                  const isCurrentVideo = slides[currentIndex].videoId === slide.videoId;
+                  
+                  if (isCurrentVideo && isSectionVisible) {
+                    setTimeout(() => {
+                      event.target.playVideo();
+                      event.target.unMute();
+                    }, 300);
+                  }
+                },
+                onStateChange: (event) => {
+                  // Optional: handle state changes
+                },
+                onError: (error) => {
+                  console.error(`YouTube player error for ${slide.videoId}:`, error);
+                }
+              }
+            });
+          }
+        });
+        
+        setPlayersReady(true);
+      } catch (e) {
+        console.error("Error initializing players:", e);
+      }
+    };
+    
+    // Delay initialization slightly to ensure DOM is ready
+    const timer = setTimeout(() => {
+      initializePlayers();
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, [youtubeApiLoaded, slides, currentIndex, isSectionVisible]);
+
+  // Handle visibility changes
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        const isNowVisible = entry.isIntersecting;
+        
+        console.log(`Section visibility changed to: ${isNowVisible}`);
+        setIsSectionVisible(isNowVisible);
+        
+        if (isNowVisible && playersReady) {
+          playCurrentVideo();
+        } else {
+          pauseAllVideos();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    
+    observer.observe(sectionRef.current);
+    
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [playersReady]);
+
+  // Control video playback
+  const playCurrentVideo = () => {
+    if (!playersReady) return;
+    
+    try {
+      // Pause all videos first
+      pauseAllVideos();
+      
+      // Play the current video
+      const currentVideoId = slides[currentIndex].videoId;
+      const player = playerRef.current[currentVideoId];
+      
+      if (player && typeof player.playVideo === 'function') {
+        console.log(`Playing video: ${currentVideoId}`);
+        player.playVideo();
+        player.unMute();
+      }
+    } catch (e) {
+      console.error("Error playing current video:", e);
     }
   };
 
+  const pauseAllVideos = () => {
+    try {
+      Object.values(playerRef.current).forEach(player => {
+        if (player && typeof player.pauseVideo === 'function') {
+          player.pauseVideo();
+          player.mute();
+        }
+      });
+    } catch (e) {
+      console.error("Error pausing videos:", e);
+    }
+  };
+
+  // Handle scroll-based video selection
+  useEffect(() => {
+    const container = slidesContainerRef.current;
+    if (!container) return;
+    
+    let debounceTimer;
+    
+    const handleScroll = () => {
+      clearTimeout(debounceTimer);
+      
+      debounceTimer = setTimeout(() => {
+        const slideElements = Array.from(container.children);
+        const containerRect = container.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
+        
+        let closestSlide = null;
+        let closestDistance = Infinity;
+        
+        slideElements.forEach((slide, index) => {
+          const slideRect = slide.getBoundingClientRect();
+          const slideCenter = slideRect.left + slideRect.width / 2;
+          const distance = Math.abs(containerCenter - slideCenter);
+          
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSlide = index;
+          }
+        });
+        
+        if (closestSlide !== null && closestSlide !== currentIndex) {
+          setCurrentIndex(closestSlide);
+        }
+      }, 150);
+    };
+    
+    container.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      clearTimeout(debounceTimer);
+    };
+  }, [currentIndex]);
+
+  // Play the correct video when currentIndex changes
+  useEffect(() => {
+    if (isSectionVisible && playersReady) {
+      playCurrentVideo();
+    }
+  }, [currentIndex, isSectionVisible, playersReady]);
+
   return (
     <div
-  className={`w-full bg-black overflow-hidden flex flex-col items-start justify-start pt-10 pb-0  text-xs text-darkgray-100 font-inter
-    sm:w-full sm:px-0
-    md:w-full md:px-0
-    lg:w-full lg:px-[14%]
-    xl:max-w-[1000px] xl:px-[16%]
-    ${className}`}
->
-      <div className=" flex  flex-row items-start justify-between gap-5">
-        <div className="h-auto flex flex-col items-start gap-1">
-          <div className="flex flex-row items-center gap-1.75cm">
-            <img
-              className="w-4 h-4"
-              alt="Star"
-              src="/starsvg.svg"
-            />
-            <div className="text-md font-semibold text-gray-450 uppercase tracking-wider">
-              TOPPERS SECRETS
-            </div>
-          </div>
-          <div className="self-stretch h-auto relative text-11xl text-white">
-            <h1 className="m-0 absolute top-0 left-0 text-inherit leading-[39px] font-bold font-inherit flex items-center w-[350px] h-[41px] mq450:text-lg mq450:leading-[23px] mq925:text-5xl mq925:leading-[31px]">
-              {`Hear Straight from our`}
-            </h1>
-            <div className="absolute h-full top-0 bottom-0 left-[334px] w-[120.1px] text-10xl-9">
-              <img
-                className="absolute top-[24.6px] left-0 w-[119.9px] h-[41px]"
-                alt=""
-                src="/image-6.svg"
-              />
-              <b className="absolute top-0 left-0 leading-[39px] flex items-center w-[121.1px] h-[41px] min-w-[121.1px] z-[1] mq450:text-5xl mq450:leading-[31px]">
-                Toppers
-              </b>
-            </div>
+      ref={sectionRef}
+      className="w-full bg-black overflow-hidden flex flex-col items-start justify-start py-10 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16"
+    >
+      <div className="w-full max-w-5xl mx-auto">
+        <div className="flex flex-row items-center gap-2 mb-4">
+          <img
+            className="w-4 h-4 relative top-[12px]"
+            alt="Star"
+            src="/starsvg.svg"
+          />
+          <div className="text-sm font-sf-pro relative top-[12px] right-[4px] font-bold text-gray-200 uppercase tracking-wider">
+            TOPPERS SECRETS
           </div>
         </div>
-      </div>
+        
+        <h1 className="text-white text-xl font-sf-pro sm:text-3xl md:text-4xl font-bold leading-tight mb-8">
+          Hear Straight from our Toppers
+        </h1>
 
-      {/* Images Section */}
-      <div
-        ref={slidesContainerRef}
-        className="flex flex-row items-start justify-start gap-10 text-base text-white overflow-x-auto scroll-smooth mt-4"
-        style={{
-          width: "100%", // Desktop width calculation
-          paddingRight: "40px",
-         
-          // Desktop padding
-        }}
-      >
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0 w-[40%] max-w-[35%] rounded-xl bg-gray-700 flex flex-col items-start p-5 gap-4"
-          >
-            <img
-              className="rounded-lg object-cover w-full"
-              alt={slide.name}
-              src={slide.imgSrc}
-            />
-            <div className="text-center">
-              <p className="text-lg font-semibold">{slide.name}</p>
-              <p>{slide.company}</p>
-              <p className="text-sm text-gray-400">{slide.details}</p>
+        {/* Videos Section */}
+        <div
+          ref={slidesContainerRef}
+          className="flex flex-row gap-4 overflow-x-auto scroll-smooth scrollbar-hide"
+          style={{
+            scrollSnapType: 'x mandatory',
+          }}
+        >
+          {slides.map((slide, index) => (
+            <div
+              key={slide.videoId}
+              className="flex-none w-[85%] sm:w-[65%] md:w-[55%] lg:w-[45%] rounded-xl bg-gray-700 overflow-hidden"
+              style={{
+                scrollSnapAlign: 'start',
+              }}
+            >
+              <div className="w-full relative" style={{ paddingBottom: '56.25%' }}>
+                <div 
+                  id={`youtube-player-${slide.videoId}`}
+                  className="absolute top-0 left-0 w-full h-full"
+                >
+                  {/* Placeholder while YouTube loads */}
+                  <div className="w-full h-full flex items-center justify-center bg-gray-800">
+                    <div className="animate-pulse text-white">Loading video...</div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 text-center text-white">
+                <p className="text-lg font-semibold">{slide.name}</p>
+                <p className="text-gray-200">{slide.company}</p>
+                <p className="text-sm text-gray-200">{slide.details}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
-      
-      
     </div>
   );
-};
-
-Section1.propTypes = {
-  className: PropTypes.string,
 };
 
 export default Section1;

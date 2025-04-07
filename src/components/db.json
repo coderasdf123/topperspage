@@ -1,0 +1,11 @@
+{
+    "comments": [
+      { "id": 1, "text": "This is a sample comment" },
+      { "id": 2, "text": "JSON Server is working!" }
+    ],
+    "users": [
+      { "id": 1, "name": "Meghana" },
+      { "id": 2, "name": "John Doe" }
+    ]
+  }
+  

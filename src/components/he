@@ -1,0 +1,36 @@
+ <div className="w-full overflow-x-auto">
+    <div className="whitespace-nowrap inline-flex flex-nowrap gap-4 px-2">
+      <div className="inline-block w-[200px] sm:w-[112px]">
+        <img
+          className="h-28 w-full rounded-lg overflow-hidden object-cover"
+          alt="Manoj Kohli"
+          src="/container-5@2x.png"
+        />
+        <div className="text-center font-medium leading-[16.8px] px-4 mt-2"> Vishnuprasad Nagadevara</div>
+      </div>
+      <div className="inline-block w-[200px] sm:w-[112px]">
+        <img
+          className="h-28 w-full rounded-lg overflow-hidden object-cover"
+          alt="Dr Tathagata Dasgupta"
+          src="/container-6@2x.png"
+        />
+        <div className="text-center font-medium leading-[16.8px] px-4 mt-2">Dr Lan Ma</div>
+      </div>
+      <div className="inline-block w-[200px] sm:w-[112px]">
+        <img
+          className="h-28 w-full rounded-lg overflow-hidden object-cover"
+          alt="Dr Edward W Rogers"
+          src="/container-7@2x.png"
+        />
+        <div className="text-center font-medium leading-[16.8px] px-4 mt-2">Mr Rohit Kapoor</div>
+      </div>
+      <div className="inline-block w-[200px] sm:w-[112px]">
+        <img
+          className="h-28 w-full rounded-lg overflow-hidden object-cover"
+          alt="Mr Elkana Ezekiel"
+          src="/container-8@2x.png"
+        />
+        <div className="text-center font-medium leading-[16.8px] px-4 mt-2">Ms Malthi Satish</div>
+      </div>
+    </div>
+  </div>

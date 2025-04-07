@@ -1,0 +1,35 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "text": "This is a sample comment"
+    },
+    {
+      "id": 2,
+      "text": "JSON Server is working!"
+    },
+    {
+      "id": "fa98",
+      "text": {
+        "title": "dk",
+        "author": "dk",
+        "content": "dk",
+        "likes": 0,
+        "views": 0,
+        "comments": 0,
+        "timestamp": "2025-02-19T12:40:40.132Z"
+      },
+      "likes": null
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Meghana"
+    },
+    {
+      "id": 2,
+      "name": "John Doe"
+    }
+  ]
+}

@@ -44,6 +44,7 @@ module.exports = {
       spacing: {},
       fontFamily: {
         inter: "Inter",
+
         roboto: "Roboto",
         "ibm-plex-sans": "'IBM Plex Sans'",
         inherit: "inherit",
@@ -89,6 +90,7 @@ module.exports = {
       "36xl": "55px",
       "14xl": "33px",
       "25xl": "44px",
+      
       xs: "12px",
       "3xs": "10px",
       xl: "20px",
@@ -130,9 +132,25 @@ module.exports = {
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'],
-    },
+      go: ['Go', 'sans-serif'],
+      'sf-pro': ['SF Pro', 'sans-serif'],  // Add SF Pro font family
+      'sf-pro-black-italic': ['SF Pro Black Italic', 'sans-serif'],
+        'sf-pro-bold': ['SF Pro Bold', 'sans-serif'],
+        'sf-pro-heavy-italic': ['SF Pro Heavy Italic', 'sans-serif'],
+        'sf-pro-light-italic': ['SF Pro Light Italic', 'sans-serif'],
+        'sf-pro-medium': ['SF Pro Medium', 'sans-serif'],
+        'sf-pro-regular': ['SF Pro Regular', 'sans-serif'],
+        'sf-pro-semi-bold-italic': ['SF Pro SemiBold Italic', 'sans-serif'],
+        'sf-pro-thin-italic': ['SF Pro Thin Italic', 'sans-serif'],
+        'sf-pro-ultralight-italic': ['SF Pro UltraLight Italic', 'sans-serif'],
+        constane: ['"Constane"', 'sans-serif'],
+        golos: ['Golos Text', 'sans-serif'],
+        qwitcher: ['Qwitcher Grypen', 'serif'],
+        corinthia: ['Corinthia', 'serif'],
+      },
     
     screens: {
+      'xs': '320px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
@@ -146,4 +164,22 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar')({ nocompatible: true }),
   ],
+      animation: {
+        'pulse-custom': 'pulse-custom 1.5s infinite',
+      },
+      keyframes: {
+        'pulse-custom': {
+          '0%, 100%': {
+            transform: 'scale(1)',
+            opacity: '1',
+          },
+          '50%': {
+            transform: 'scale(1.05)',
+            opacity: '0.7',
+          },
+        },
+      },
+  
+  plugins: [],
 };
+

@@ -32,16 +32,16 @@ body {
 @tailwind utilities;
 
 /* Base styles */
-.lifestyle-course {
-  @apply relative left-0 w-full max-w-[1620px] -mt-14 h-[1100px] flex overflow-hidden bg-[#090909];
+/*}.lifestyle-course {
+  @apply relative left-0 w-full max-w-[1820px] -mt-14 h-[1100px] flex overflow-hidden bg-[#090909];
 }
 
 .course-container {
-  @apply mx-auto max-w-4xl px-8 font-inter;
+  @apply mx-auto max-w-4xl px-8 font-sf-pro-regular;
 }
 
 /* Header styles */
-.course-header {
+/*.course-header {
   @apply flex items-center gap-2;
 }
 
@@ -62,7 +62,7 @@ body {
 }
 
 /* Navigation styles */
-.nav-container {
+/*.nav-container {
   @apply mt-8 w-full rounded-xl bg-[#1e1e1e] p-4;
 }
 
@@ -103,7 +103,7 @@ body {
 }
 
 /* Content styles */
-.content-section {
+/*.content-section {
   @apply mt-8;
 }
 
@@ -132,13 +132,13 @@ body {
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .lifestyle-course {
-    @apply h-[800px];
+    @apply h-[900px];
   }
 
   .course-container {
-    @apply px-0;
+    @apply px-0 w-[80%]; 
   }
 
   .course-header {
@@ -172,10 +172,10 @@ body {
   .nav-icon {
     @apply h-4 w-4;
   }
-
   .nav-items {
-    @apply justify-start space-x-4 px-8 overflow-x-auto scrollbar-hide;
+    @apply justify-start space-x-4 px-2 overflow-x-auto scrollbar-hide;
   }
+ 
 
   .nav-item {
     @apply text-xs whitespace-nowrap;
@@ -190,22 +190,279 @@ body {
   }
 
   .content-card {
-    @apply w-full p-4;
+    @apply w-full p-2;
   }
 
   .card-list {
     @apply text-xs;
   }
+  .content-section{
+    @apply p-0;
+  }
+}
+/* Extra small screens (below sm/640px) */
+/*@media (max-width: 639px) {
+  .course-container {
+    @apply w-[98%] p-2;
+
+  }
+  
+  .nav-container {
+    @apply p-2 w-[93%];
+  }
+  .content-container {
+    @apply w-[90%];
+  }
+  .cards-container {
+    @apply w-[95%];
+  }
+  .course-header {
+    @apply font-sf-pro-bold;
+  }
+  .course-title span {
+    @apply font-sf-pro-bold;
+  }
+  .course-label {
+    @apply font-sf-pro-bold text-xs;
+  }
+  .nav-item {
+    @apply font-sf-pro-regular;
+  }
+  .card-list {
+    @apply font-sf-pro-regular;
+  }
+
+  
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.scrollbar-hide::-webkit-scrollbar {
+/*.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.scrollbar-hide {
+/*.scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  /*scrollbar-width: none;  /* Firefox */
+/*}
+
+
+
+/* Go-Regular */
+@font-face {
+  font-family: 'Go';
+  src: url('/go_font/Go-Regular.woff2') format('woff2'), /* Best for modern browsers */
+       url('/go_font/Go-Regular.woff') format('woff'),   /* Fallback for older browsers */
+       url('/go_font/Go-Regular.ttf') format('truetype'); /* Legacy fallback */
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* Go-Bold */
+@font-face {
+  font-family: 'Go';
+  src: url('/go_font/Go-Bold.woff2') format('woff2'), /* Best for modern browsers */
+       url('/go_font/Go-Bold.woff') format('woff'),   /* Fallback for older browsers */
+       url('/go_font/Go-Bold.ttf') format('truetype'); /* Legacy fallback */
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* SF Pro Regular */
+/* SF Pro Regular */
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/apple/SFPRODISPLAYREGULAR.OTF') format('opentype'); /* Using OTF format */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* SF Pro Bold */
+@font-face {
+  font-family: 'SF Pro';
+  src: url('/apple/SFPRODISPLAYBOLD.OTF') format('opentype'); /* Best for modern browsers */
+       
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Black Italic';
+  src: url('/apple/SFProDisplayBlackItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Bold';
+  src: url('/apple/SFProDisplayBold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Heavy Italic';
+  src: url('/apple/SFProDisplayHeavyItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Light Italic';
+  src: url('/apple/SFProDisplayLightItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Medium';
+  src: url('/apple/SFProDisplayMedium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Regular';
+  src: url('/apple/SFProDisplayRegular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro SemiBold Italic';
+  src: url('/apple/SFProDisplaySemiBoldItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro Thin Italic';
+  src: url('/apple/SFProDisplayThinItalic.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SF Pro UltraLight Italic';
+  src: url('/apple/SFProDisplayUltraLightItalic.otf') format('opentype');
+}
+
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.3s ease-out;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  60% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+ 
+    
+  
+    @keyframes bolt-fade {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(1px, -1px); }
+      50% { transform: translate(-1px, 1px); }
+      75% { transform: translate(1px, -1px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes sparkle {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+    .animate-bolt-fade {
+      animation: bolt-fade 1.5s infinite;
+    }
+    .animate-shake {
+      animation: shake 0.8s infinite;
+    }
+    .animate-sparkle {
+      animation: sparkle 1s infinite;
+    }
+
+
+
+    /* SkillsAssessmentForm.css */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes outbulge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Apply pulsing effect to the questionnaire container */
+.pulsing-questionnaire {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Apply pulsing and outbulging to CTA buttons */
+.pulsing-cta {
+  animation: outbulge 1.5s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.pulsing-cta:hover {
+  transform: scale(1.15);
+}
+
+/* Grey gradient background for the main container (not the questionnaire) */
+.gradient-background {
+  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}

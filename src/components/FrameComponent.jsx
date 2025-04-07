@@ -22,7 +22,7 @@ const FrameComponent = ({
 
   return (
     <div
-      className={`flex flex-col items-start justify-start gap-2 text-left text-xs text-darkgray-100 font-inter ${className}`}
+      className={`flex flex-col items-start justify-start gap-2 text-left text-xs text-darkgray-100 font-sf-pro-bold ${className}`}
     >
       <div className="flex flex-row items-start justify-start gap-2.5">
         <div className="flex flex-col items-start justify-start pt-px px-0 pb-0">
@@ -33,14 +33,14 @@ const FrameComponent = ({
           />
         </div>
         <div
-          className="relative tracking-[1px] uppercase font-semibold inline-block min-w-[114px] z-[1]"
+          className="relative tracking-[1px] uppercase font-sf-pro-medium inline-block min-w-[114px] z-[1]"
           style={jOINTHEUNIONStyle}
         >
           {jOINTHEUNION}
         </div>
       </div>
       <h1
-        className="m-0 relative text-11xl leading-[39px] font-bold font-inherit text-black z-[2] mq450:text-lg mq450:leading-[23px] mq925:text-5xl mq925:leading-[31px]"
+        className="m-0 relative text-4xl leading-[39px] font-sf-pro-bold text-black z-[2] mq450:text-lg mq450:leading-[23px] mq925:text-5xl mq925:leading-[31px]"
         style={ourProgrammesStyle}
       >
         {ourProgrammes}

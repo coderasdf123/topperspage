@@ -1,88 +1,101 @@
+import React from 'react';
 import PropTypes from "prop-types";
+import { PlayCircle } from 'lucide-react';
 
 const ExpertListTwo = ({ className = "" }) => {
+  const experts = [
+    {
+      name: "Vishnuprasad Nagadevara",
+      role: "Former Dean",
+      company: "IIM Bangalore",
+      topic: "Decision Making in Complex Environments",
+      image: "/peer_5.jpeg"
+    },
+    {
+      name: "Dr Lan Ma",
+      role: "Adjunct Professor of Business",
+      company: "NYU Shanghai",
+      topic: "Global Business Strategy",
+      image: "/peer_6.jpeg"
+    },
+    {
+      name: "Mr Rohit Kapoor",
+      role: "CEO, Food Marketplace",
+      company: "Swiggy",
+      topic: "Scaling Digital Businesses",
+      image: "/peer_7.jpeg"
+    },
+    {
+      name: "Ms Malthi Satish",
+      role: "Head of Operations",
+      company: "Leading Tech Firm",
+      topic: "Operational Excellence",
+      image: "/peer_8.jpeg",
+    }
+  ];
+
   return (
-    <div
-      className={`flex flex-col items-start justify-start gap-[4.4px] w-[calc(100%-30rem)] pb-[30px] -ml-[140px] text-left text-xs text-white font-inter bg-black ${className}`}
-      style={{ paddingLeft: '25%', paddingRight: '7.5cm' }}
-    >
-      <div className="self-stretch flex flex-row items-start justify-start gap-5">
-        <img
-          className="h-28 flex-1 relative rounded-lg max-w-[300px] overflow-hidden object-cover min-w-[112px]"
-          alt=""
-          src="/container-5@2x.png"
-        />
-        <img
-          className="h-28 flex-1 relative rounded-lg max-w-[300px] overflow-hidden object-cover min-w-[112px]"
-          alt=""
-          src="/container-6@2x.png"
-        />
-        <img
-          className="h-28 flex-1 relative rounded-lg max-w-[300px] overflow-hidden object-cover min-w-[112px]"
-          alt=""
-          src="/container-7@2x.png"
-        />
-        <img
-          className="h-28 flex-1 relative rounded-lg max-w-[300px] overflow-hidden object-cover min-w-[112px]"
-          alt=""
-          src="/container-8@2x.png"
-        />
-      </div>
-
-      <div className="w-full flex flex-col items-start justify-start gap-px max-w-full">
-        <div className="w-full flex flex-row items-start justify-center gap-[76.4px] max-w-full mq450:gap-[19px] mq925:gap-[38px] mq1400:flex-wrap">
-          <div className="flex-1 relative leading-[16.8px] font-medium inline-block min-w-[115px] text-white">
-            Dr Vishnuprasad Nagadevara
-          </div>
-          <div className="flex-[0.8861] flex flex-col items-start justify-start py-0 pl-0 pr-5 box-border min-w-[115px] mq450:flex-1">
-            <div className="relative leading-[16.8px] font-medium inline-block min-w-[61.6px] text-white">
-              Dr Lan Ma
+    <div className="flex flex-col items-start justify-start gap-[4.4px] py-[50px] text-left text-xs text-white font-inter bg-black w-full sm:pl-[20%] sm:pr-[7.5cm] sm:max-w-4xl">
+      {/* Mobile layout */}
+      <div className="w-full overflow-x-auto">
+        <div className="sm:hidden whitespace-nowrap inline-flex flex-nowrap gap-4 px-2">
+          {experts.map((expert, index) => (
+            <div key={index} className="inline-block w-[280px] bg-[#111111] rounded-xl overflow-hidden">
+              <div className="relative">
+                <img
+                  className="h-36 w-full object-cover rounded-t-xl"
+                  alt={expert.name}
+                  src={expert.image}
+                />
+                <button className="absolute bottom-3 right-3 bg-white/20 rounded-full p-1.5 backdrop-blur-sm">
+                  <PlayCircle className="w-5 h-5 text-white" />
+                </button>
+              </div>
+              <div className="p-4">
+                <h3 className="text-base font-semibold mb-1">{expert.name}</h3>
+                <p className="text-sm text-white mb-1">{expert.role}</p>
+                <p className="text-xs text-white font-medium mb-2">{expert.company}</p>
+                <p className="text-sm text-white">{expert.topic}</p>
+              </div>
             </div>
-          </div>
-          <div className="flex-[0.8861] flex flex-col items-start justify-start py-0 pl-0 pr-5 box-border min-w-[115px] mq450:flex-1">
-            <div className="relative leading-[16.8px] font-medium inline-block min-w-[98.4px] text-white">
-              Mr Rohit Kapoor
-            </div>
-          </div>
-          <div className="relative leading-[16.8px] font-medium inline-block min-w-[98.3px] text-white">
-            Ms Malthi Satish
-          </div>
-        </div>
-
-        <div className="w-full flex flex-row items-start justify-center gap-[75.7px] text-black mq450:gap-[19px] mq925:gap-[38px] mq1400:flex-wrap">
-          <div className="flex-[0.8863] flex flex-col items-start justify-start py-0 pl-0 pr-5 box-border min-w-[115px] mq450:flex-1">
-            <div className="relative leading-[19.2px]">
-              <p className="m-0 font-medium">Former Dean,</p>
-              <p className="m-0">
-                <b>IIM Bangalore</b>
-              </p>
-            </div>
-          </div>
-          <div className="flex-1 relative leading-[19.2px] inline-block min-w-[115px]">
-            <p className="m-0 font-medium">Adjunct Professor of Business,</p>
-            <p className="m-0">
-              <b>NYU Shanghai</b>
-            </p>
-          </div>
-          <div className="flex-[0.8863] flex flex-col items-start justify-start py-0 pl-0 pr-5 box-border min-w-[115px] mq450:flex-1">
-            <div className="relative leading-[19.2px]">
-              <p className="m-0 font-medium">CEO, Food Marketplace,</p>
-              <p className="m-0">
-                <b>Swiggy</b>
-              </p>
-            </div>
-          </div>
-          <div className="relative leading-[19.2px]">
-            <p className="m-0 font-medium">Former Director of PM,</p>
-            <p className="m-0">
-              <b>Paypal</b>
-            </p>
-          </div>
+          ))}
         </div>
       </div>
 
-      <div className="self-stretch flex flex-col items-start justify-start gap-px max-w-full text-white">
+      {/* Desktop layout */}
+      <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-6 px-4 w-full">
+        {experts.map((expert, index) => (
+          <div key={index} className="w-full bg-[#111111] rounded-xl overflow-hidden">
+            <div className="relative">
+              <img
+                className="h-36 w-full object-cover rounded-t-xl"
+                alt={expert.name}
+                src={expert.image}
+              />
+              <button className="absolute bottom-3 right-3 bg-white/20 rounded-full p-1.5 backdrop-blur-sm">
+                <PlayCircle className="w-5 h-5 text-white" />
+              </button>
+            </div>
+            <div className="p-4">
+              <h3 className="text-base font-semibold mb-1">{expert.name}</h3>
+              <p className="text-sm text-white mb-1">{expert.role}</p>
+              <p className="text-xs text-white font-medium mb-2">{expert.company}</p>
+              <p className="text-sm text-white">{expert.topic}</p>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Mobile View Trending Insights button */}
+      {/*<div className="sm:hidden w-full flex justify-center mt-8">
+        <div className="rounded-full bg-gradient-to-r from-cyan-400 via-yellow-300 to-orange-400 p-0.5">
+          <div className="rounded-35xl bg-black overflow-hidden flex items-center justify-center px-4 py-2">
+            <span className="text-white text-xs font-semibold whitespace-nowrap">
+              View Trending Insights
+            </span>
+          </div>
+        </div>
+      </div>*/}
     </div>
   );
 };
